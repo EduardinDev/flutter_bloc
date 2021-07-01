@@ -27,7 +27,7 @@ class InicioPage extends StatelessWidget {
       title: Text('Suma de dos números'),
       subtitle: Text('Utilizando bloc'),
       onTap: () {
-        Navigator.pushNamed(context, '/suma');
+        Navigator.pushNamed(context, 'suma');
       },
     );
   }
