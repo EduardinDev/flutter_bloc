@@ -6,7 +6,8 @@ class SumaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    sumaBloc.changeNumero1('0');
+    sumaBloc.changeNumero2('0');
     return Scaffold(
       appBar: AppBar(
         title: Text('Suma bloc'),
@@ -37,18 +38,18 @@ class SumaPage extends StatelessWidget {
   _numero1() {
     return StreamBuilder(
       stream: sumaBloc.numero1Stream,
-      builder: (context, AsyncSnapshot<int> snapshot) {
+      builder: (context, AsyncSnapshot<String> snapshot) {
         return TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
               labelText: 'número 1', errorText: snapshot.error?.toString()),
           onChanged: (value) {
             if (value != '') {
-              sumaBloc.changeNumero1(int.parse(value));
-              //sumaBloc.sumarNumeros();
+              sumaBloc.changeNumero1(value);
+              sumaBloc.sumarNumeros();
             } else {
-              sumaBloc.changeNumero1(0);
-              //sumaBloc.sumarNumeros();
+              sumaBloc.changeNumero1('0');
+              sumaBloc.sumarNumeros();
             }
           },
         );
@@ -59,17 +60,17 @@ class SumaPage extends StatelessWidget {
   _numero2() {
     return StreamBuilder(
       stream: sumaBloc.numero2Stream,
-      builder: (context, AsyncSnapshot<int> snapshot) {
+      builder: (context, AsyncSnapshot<String> snapshot) {
         return TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(labelText: 'número 2'),
           onChanged: (value) {
             if (value != '') {
-              sumaBloc.changeNumero2(int.parse(value));
-              //sumaBloc.sumarNumeros();
+              sumaBloc.changeNumero2(value);
+              sumaBloc.sumarNumeros();
             } else {
-              sumaBloc.changeNumero2(0);
-              //sumaBloc.sumarNumeros();
+              sumaBloc.changeNumero2('0');
+              sumaBloc.sumarNumeros();
             }
           },
         );
@@ -79,8 +80,8 @@ class SumaPage extends StatelessWidget {
 
   _respuestaStream() {
     return StreamBuilder(
-        stream: sumaBloc.validacion,
-        builder: (context, AsyncSnapshot<int> snapshot) {
+        stream: sumaBloc.resultadoStream,
+        builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.data != null) {
             print(snapshot.data);
             return _resultado(snapshot.data);
@@ -98,7 +99,7 @@ class SumaPage extends StatelessWidget {
           border: Border.all(),
         ),
         child: Center(
-          child: Text(respuesta.toString()),
+          child: Text(respuesta),
         ));
   }
 }

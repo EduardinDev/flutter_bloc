@@ -1,38 +1,32 @@
-import 'package:flutter_ejerciciobloc/src/bloc/validacion.dart';
+
 import 'package:rxdart/subjects.dart';
 import 'package:rxdart/rxdart.dart';
 
-class SumaBloc with Validacion {
+class SumaBloc {
   // los controladores de los stream
-  final _numero1Controller = BehaviorSubject<int>();
-  final _numero2Controller = BehaviorSubject<int>();
-  final _resultadoController = BehaviorSubject<int>();
+  final _numero1Controller = BehaviorSubject<String>();
+  final _numero2Controller = BehaviorSubject<String>();
+  final _resultadoController = BehaviorSubject<String>();
 
   // los streams de los controladores
-  Stream<int> get numero1Stream =>
-      _numero1Controller.stream.transform(validarNumero);
-  Stream<int> get numero2Stream =>
-      _numero2Controller.stream.transform(validarNumero);
- 
+  Stream<String> get numero1Stream => _numero1Controller.stream;
+  Stream<String> get numero2Stream => _numero2Controller.stream;
+  Stream<String> get resultadoStream => _resultadoController.stream;
 
   // Insersores de valores a los streams
-  Function(int) get changeNumero1 => _numero1Controller.sink.add;
-  Function(int) get changeNumero2 => _numero2Controller.sink.add;
-
+  Function(String) get changeNumero1 => _numero1Controller.sink.add;
+  Function(String) get changeNumero2 => _numero2Controller.sink.add;
+  Function(String) get changeResultado => _resultadoController.sink.add;
 
   // obtener ultimos valores de los streams
-  int get numero1 => _numero1Controller.value;
-  int get numero2 => _numero2Controller.value;
- 
-
-  Stream<int> get validacion =>
-      Rx.combineLatest2(numero1Stream, numero2Stream, (a, b) => sumarNumeros());
-
+  String get numero1 => _numero1Controller.value;
+  String get numero2 => _numero2Controller.value;
+  String get resultado => _resultadoController.value;
 
   // sumar valores
-  int sumarNumeros() {
-    int operacion = _numero1Controller.value + _numero2Controller.value;
-    return operacion;
+  sumarNumeros() {
+    int operacion = int.parse(numero1) + int.parse(numero2);
+    changeResultado(operacion.toString());
   }
 
   // cerrar los streams
