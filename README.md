@@ -1,16 +1,15 @@
-# flutter_ejerciciobloc
+# Flutter Bloc
 
-A new Flutter project.
+En esta aplicación se están realizando ejercicios básicos de 
+operaciones matemáticas con flutter, dart y el patron Bloc para 
+reforzar el conocimiento de este gestor de estados.
 
-## Getting Started
+## Librerias utilizadas
 
-This project is a starting point for a Flutter application.
+RxDart
 
-A few resources to get you started if this is your first Flutter project:
+## Operaciones mátematicas realizadas
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Suma
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
