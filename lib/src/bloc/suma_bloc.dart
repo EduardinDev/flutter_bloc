@@ -3,6 +3,13 @@ import 'package:rxdart/subjects.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SumaBloc {
+
+// al empezar la aplicación se inicializan los numeros con cero
+SumaBloc(){
+  changeNumero1('0');
+  changeNumero2('0');
+}
+
   // los controladores de los stream
   final _numero1Controller = BehaviorSubject<String>();
   final _numero2Controller = BehaviorSubject<String>();

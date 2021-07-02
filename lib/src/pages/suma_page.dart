@@ -6,8 +6,7 @@ class SumaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    sumaBloc.changeNumero1('0');
-    sumaBloc.changeNumero2('0');
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Suma bloc'),
