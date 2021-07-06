@@ -18,7 +18,8 @@ class InicioPage extends StatelessWidget {
   Widget _opciones(BuildContext context) {
     return ListView(
       children: <Widget>[
-        _suma(context)
+        _suma(context),
+        _resta(context)
       ],
     );
   }
@@ -29,6 +30,15 @@ class InicioPage extends StatelessWidget {
       subtitle: Text('Utilizando bloc'),
       onTap: () {
         Navigator.pushNamed(context, 'suma');
+      },
+    );
+  }
+  Widget _resta(BuildContext context) {
+    return ListTile(
+      title: Text('Resta de dos números'),
+      subtitle: Text('Utilizando bloc'),
+      onTap: () {
+        Navigator.pushNamed(context, 'resta');
       },
     );
   }

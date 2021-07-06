@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ejerciciobloc/src/pages/inicio_page.dart';
+import 'package:flutter_ejerciciobloc/src/pages/resta_page.dart';
 import 'package:flutter_ejerciciobloc/src/pages/suma_page.dart';
  
 void main() => runApp(MyApp());
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: <String,WidgetBuilder>{
         '/'         : (BuildContext context) => InicioPage(),
-        'suma'      : (BuildContext context) => SumaPage()
+        'suma'      : (BuildContext context) => SumaPage(),
+        'resta'     : (BuildContext context) => RestaPage()
       },
 
     );

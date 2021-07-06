@@ -15,6 +15,7 @@ class RestaBloc {
 
   Stream<String> get numero1Stream => _numero1Controller.stream;
   Stream<String> get numero2Stream => _numero2Controller.stream;
+  Stream<String> get resultadoStream => _resultadoController.stream;
 
   // insersores
 
@@ -27,6 +28,13 @@ class RestaBloc {
   String get numero1 => _numero1Controller.value;
   String get numero2 => _numero2Controller.value;
   String get resultado => _resultadoController.value;
+
+  // operacion resta
+
+  operacionResta() {
+    int resta = int.parse(numero1) - int.parse(numero2);
+    changeResultado(resta.toString());
+  }
 
   dispose() {
     _numero1Controller.close();
