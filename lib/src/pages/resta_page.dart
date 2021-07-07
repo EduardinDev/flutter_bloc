@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ejerciciobloc/src/bloc/resta_bloc.dart';
+import 'package:flutter_ejerciciobloc/src/widgets/contenedores_widget.dart'
+    as contenedor;
+import 'package:flutter_ejerciciobloc/src/widgets/inputsNumber_widget.dart'
+    as input;
 
 class RestaPage extends StatelessWidget {
   final restaBloc = new RestaBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,15 +19,29 @@ class RestaPage extends StatelessWidget {
   }
 
   _resta() {
+    //restaBloc.numero1Controller.sink.add('2');
+    //restaBloc.numero2Controller.sink.add('5');
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          _numero1(),
+          input.numero(
+              stream: restaBloc.numero1Stream,
+              controllernumero1: restaBloc.numero1Controller,
+              controllernumero2: restaBloc.numero2Controller,
+              tiponum: 'n1',
+              changeresultado: restaBloc.resultadoController,
+              operacion: 'resta'),
           SizedBox(
             height: 15.0,
           ),
-          _numero2(),
+          input.numero(
+              stream: restaBloc.numero2Stream,
+              controllernumero1: restaBloc.numero1Controller,
+              controllernumero2: restaBloc.numero2Controller,
+              tiponum: 'n2',
+              changeresultado: restaBloc.resultadoController,
+              operacion: 'resta'),
           SizedBox(
             height: 15.0,
           ),
@@ -32,65 +51,15 @@ class RestaPage extends StatelessWidget {
     );
   }
 
-  Widget _numero1() {
-    return StreamBuilder(
-        stream: restaBloc.numero1Stream,
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          return TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Número 1'),
-            onChanged: (value) {
-              if (value != '') {
-                restaBloc.changeNumero1(value);
-                restaBloc.operacionResta();
-              } else {
-                restaBloc.changeNumero1('0');
-                restaBloc.operacionResta();
-              }
-            },
-          );
-        });
-  }
-
-  Widget _numero2() {
-    return StreamBuilder(
-        stream: restaBloc.numero2Stream,
-        builder: (context, AsyncSnapshot<String> snapshot) {
-          return TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Número 2'),
-            onChanged: (value) {
-              if (value != '') {
-                restaBloc.changeNumero2(value);
-                restaBloc.operacionResta();
-              } else {
-                restaBloc.changeNumero2('0');
-                restaBloc.operacionResta();
-              }
-            },
-          );
-        });
-  }
-
   _resultado() {
     return StreamBuilder(
         stream: restaBloc.resultadoStream,
         builder: (context, AsyncSnapshot<String> snapshot) {
           if (snapshot.data != null) {
-            return _contenedorRespuesta(snapshot.data);
+            return contenedor.contenedorRespuesta(snapshot.data);
           } else {
-            return _contenedorRespuesta('0');
+            return contenedor.contenedorRespuesta('0');
           }
         });
-  }
-
-  Container _contenedorRespuesta(respuesta) {
-    return Container(
-        margin: EdgeInsets.all(15.0),
-        height: 50.0,
-        decoration: BoxDecoration(border: Border.all()),
-        child: Center(
-          child: Text(respuesta),
-        ));
   }
 }

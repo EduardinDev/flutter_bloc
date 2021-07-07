@@ -11,24 +11,24 @@ SumaBloc(){
 }
 
   // los controladores de los stream
-  final _numero1Controller = BehaviorSubject<String>();
-  final _numero2Controller = BehaviorSubject<String>();
-  final _resultadoController = BehaviorSubject<String>();
+  final numero1Controller = BehaviorSubject<String>();
+  final numero2Controller = BehaviorSubject<String>();
+  final resultadoController = BehaviorSubject<String>();
 
   // los streams de los controladores
-  Stream<String> get numero1Stream => _numero1Controller.stream;
-  Stream<String> get numero2Stream => _numero2Controller.stream;
-  Stream<String> get resultadoStream => _resultadoController.stream;
+  Stream<String> get numero1Stream => numero1Controller.stream;
+  Stream<String> get numero2Stream => numero2Controller.stream;
+  Stream<String> get resultadoStream => resultadoController.stream;
 
   // Insersores de valores a los streams
-  Function(String) get changeNumero1 => _numero1Controller.sink.add;
-  Function(String) get changeNumero2 => _numero2Controller.sink.add;
-  Function(String) get changeResultado => _resultadoController.sink.add;
+  Function(String) get changeNumero1 => numero1Controller.sink.add;
+  Function(String) get changeNumero2 => numero2Controller.sink.add;
+  Function(String) get changeResultado => resultadoController.sink.add;
 
   // obtener ultimos valores de los streams
-  String get numero1 => _numero1Controller.value;
-  String get numero2 => _numero2Controller.value;
-  String get resultado => _resultadoController.value;
+  String get numero1 => numero1Controller.value;
+  String get numero2 => numero2Controller.value;
+  String get resultado => resultadoController.value;
 
   // sumar valores
   sumarNumeros() {
@@ -40,8 +40,8 @@ SumaBloc(){
   // nota: si no se cierran entonces volveran a crearse
   // cada vez que se inicie la clase en donde se los instancio
   void dispose() {
-    _numero1Controller.close();
-    _numero2Controller.close();
-    _resultadoController.close();
+    numero1Controller.close();
+    numero2Controller.close();
+    resultadoController.close();
   }
 }
